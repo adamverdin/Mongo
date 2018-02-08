@@ -1,6 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser')
-const {ObjectID} = require('mongodb')
+const {
+    ObjectID
+} = require('mongodb')
 
 var {
     mongoose
@@ -34,7 +36,7 @@ app.get('/todos', (req, res) => {
             todos
         });
     }, (e) => {
-        res.status(400).send(e);
+        res.status(404).send(e);
     });
 });
 
@@ -49,21 +51,22 @@ app.get('/todos/:id', (req, res) => {
     // console.log("ID is not valid");
     // };
     if (!ObjectID.isValid(id)) {
-    return res.status(400).send();
+        return res.status(404).send();
     };
 
     //if Invalid respond with 404-send back empty body
     //find by id
-Todo.findById(id).then((todo) => { 
-    if(!todo){
-        return res.status(400).send();
-    }
-    else {
-        res.send({todo});
-    }
-}).catch((e) => {
-    res.statusCode(400).send();
-});;
+    Todo.findById(id).then((todo) => {
+        if (!todo) {
+            return res.status(404).send();
+        } else {
+            res.send({
+                todo
+            });
+        }
+    }).catch((e) => {
+        res.statusCode(404).send();
+    });
     //success
     //if todo there -> send back
     //if no to do -> send back 404 w/ empty body.
