@@ -67,13 +67,39 @@ app.get('/todos/:id', (req, res) => {
             });
         }
     }).catch((e) => {
-        res.statusCode(404).send();
+        res.status(404).send();
     });
     //success
     //if todo there -> send back
     //if no to do -> send back 404 w/ empty body.
     //error
     //400 -> and send empty boy back
+});
+
+
+app.delete('/todos/:id', (req, res) => {
+//get id
+    var id = req.params.id;
+//validate id
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+    };
+//remove todo by id
+    Todo.findByIdAndRemove(id).then((todo) => {
+
+        // res.send({todo});
+        if (!todo) {
+            return res.status(404).send();
+        } else {
+            res.send({todo});
+        }
+    }).catch((e) => {
+        res.status(404).send();
+    });
+    //success
+        //if no doc send 404
+    //err
+        //send 404
 });
 
 app.listen(port, () => {
