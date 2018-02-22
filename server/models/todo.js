@@ -11,7 +11,7 @@ var Todo = mongoose.model('Todo', {
         type: Boolean,
         default: false
     },
-    completedat: {
+    completedAt: {
         type: Number,
         default: null
     }
@@ -20,7 +20,7 @@ var Todo = mongoose.model('Todo', {
 // var newTodo = new Todo({
 //     text: "this is a todo",
 //     completed: false,
-//     completedat: null
+//     completedAt: null
 // });
 
 // newTodo.save().then((doc) => {
