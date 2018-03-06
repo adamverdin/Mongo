@@ -15,7 +15,7 @@ var {
 var {
     User
 } = require('./models/user');
-
+var {authenticate} = require('./middleware/authenticate.js');
 var app = express();
 
 const port = process.env.PORT || 3000;
@@ -151,6 +151,11 @@ app.listen(port, () => {
     console.log(`Started up at ${port}`)
 });
 
+
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
+}); 
 
 module.exports = {
     app
