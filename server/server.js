@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const _ = require('lodash');
 const {
     ObjectID
-} = require('mongodb')
+} = require('mongodb');
 
 var {
     mongoose
@@ -15,7 +15,7 @@ var {
 var {
     User
 } = require('./models/user');
-var {authenticate} = require('./middleware/authenticate.js');
+var {authenticate} = require('./middleware/authenticate');
 var app = express();
 
 const port = process.env.PORT || 3000;
